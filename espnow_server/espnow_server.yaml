@@ -1,0 +1,25 @@
+esphome:
+  name: espnow-server-devkit
+  # friendly_name: espnow-server-devkit
+  includes:
+    - gesture_espnow_receiver.h
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+
+text_sensor:
+- platform: custom
+  lambda: |-
+    auto gesture_sensor = new GestureSensor();
+    App.register_component(gesture_sensor);
+    return {gesture_sensor};
+
+  text_sensors:
+    name: "Gesture Sensor"
+    
+# Enable logging
+logger:
+  baud_rate: 0  # Disable UART Logging. Won't start unless serial connected otherwise.
